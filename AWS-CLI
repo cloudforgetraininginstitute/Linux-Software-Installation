@@ -1,0 +1,9 @@
+#Download the AWS CLI
+curl -o awscliv2.sig https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip.sig
+unzip -u awscliv2.zip
+#Run the install program
+sudo ./aws/install
+#Check your PATH
+echo $PATH
+export PATH=$PATH:/usr/local/bin
+aws --version
