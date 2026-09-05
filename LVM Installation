@@ -1,0 +1,2 @@
+sudo yum install lvm2 -y
+rpm -qa | grep lvm2
