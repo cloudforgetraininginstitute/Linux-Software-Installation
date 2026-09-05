@@ -1,2 +1,42 @@
 sudo yum install lvm2 -y
 rpm -qa | grep lvm2
+
+sudo yum install lvm2 -y
+rpm -qa | grep lvm2
+
+# 1. Verify disks
+lsblk
+
+# 2. Create Physical Volumes
+sudo pvcreate /dev/nvme2n1
+sudo pvcreate /dev/nvme3n1
+
+# 3. Verify PVs
+sudo pvs
+
+# 4. Create Volume Group
+sudo vgcreate datavg /dev/nvme2n1 /dev/nvme3n1
+
+# 5. Verify VG
+sudo vgs
+
+# 6. Create 10GB Logical Volume
+sudo lvcreate -L 10G -n lvdata datavg
+
+# 7. Verify LV
+sudo lvs
+
+# 8. Create filesystem
+sudo mkfs.xfs /dev/datavg/lvdata
+
+# 9. Create mount point
+sudo mkdir /data
+
+# 10. Mount
+sudo mount /dev/datavg/lvdata /data
+
+# 11. Verify
+df -hT
+
+# 12. Check
+lsblk
