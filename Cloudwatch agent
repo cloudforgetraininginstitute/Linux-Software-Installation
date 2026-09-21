@@ -3,11 +3,11 @@ cd /tmp
 wget https://amazoncloudwatch-agent.s3.amazonaws.com/redhat/amd64/latest/amazon-cloudwatch-agent.rpm
 rpm -U ./amazon-cloudwatch-agent.rpm
 rpm -qa | grep amazon-cloudwatch-agent
-rpm -qa | grep amazon-cloudwatch-agentls -l /opt/aws/amazon-cloudwatch-agent/
+rpm -qa | grep amazon-cloudwatch-agent 
+ls -l /opt/aws/amazon-cloudwatch-agent/
 
 #The main configuration directory is:
-
-/opt/aws/amazon-cloudwatch-agent/etc/
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard
 #Create CloudWatch Agent configuration
 Do you want to monitor metrics from this instance?
 Do you want to monitor CPU?
@@ -15,3 +15,4 @@ Do you want to monitor memory?
 Do you want to monitor disk?
 Do you want to monitor swap?
 Do you want to monitor log files?
+systemctl status amazon-cloudwatch-agent
