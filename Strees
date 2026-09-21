@@ -1,9 +1,9 @@
 cat /etc/redhat-release
-sudo dnf install -y epel-release
-sudo dnf install -y stress
-stress --version
-stress --cpu 2
-stress --cpu 2 --timeout 300
-stress --vm 1 --vm-bytes 1G --timeout 300
-stress --cpu 2 --vm 1 --vm-bytes 1G --timeout 300
-systemctl start stress
+# Enable EPEL repository
+sudo subscription-manager repos --enable codeready-builder-for-rhel-9-$(arch)-rpms
+sudo dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+
+# Install stress-ng
+sudo dnf install -y stress-ng
+#inject the cpu load
+stress-ng --cpu 0 --timeout 60s --metrics-brief
