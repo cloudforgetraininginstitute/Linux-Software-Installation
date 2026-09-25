@@ -1,0 +1,54 @@
+. Update package information
+sudo dnf update -y
+2. Install HTTPD
+sudo dnf install httpd -y
+3. Start HTTPD
+sudo systemctl start httpd
+4. Enable it at boot
+sudo systemctl enable httpd
+5. Check the service
+sudo systemctl status httpd
+
+You should see:
+
+Active: active (running)
+6. Test locally
+curl http://localhost
+
+You should get the Apache test page HTML.
+
+7. Create your own test page
+echo "Welcome to CloudForge Training Institute" | sudo tee /var/www/html/index.html
+
+Then:
+
+curl http://localhost
+
+Expected:
+
+Welcome to CloudForge Training Institute
+8. If this is an AWS EC2 RHEL server
+
+Allow HTTP traffic through the Security Group:
+
+Type: HTTP
+Protocol: TCP
+Port: 80
+Source: 0.0.0.0/0
+
+If firewalld is running on the RHEL server:
+
+sudo firewall-cmd --permanent --add-service=http
+sudo firewall-cmd --reload
+
+Then access:
+
+http://<EC2-Public-IP>
+Quick installation
+
+If you just want the commands for your CloudWatch log-testing lab:
+
+sudo dnf install httpd -y
+sudo systemctl enable --now httpd
+echo "CloudForge Test Server" | sudo tee /var/www/html/index.html
+sudo systemctl status httpd
